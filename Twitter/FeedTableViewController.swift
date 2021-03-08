@@ -23,6 +23,10 @@ class FeedTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         loadTweet()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.loadTweet()
+    }
     
     func loadTweet(){
         let myURL = "https://api.twitter.com/1.1/statuses/home_timeline.json"
@@ -72,6 +76,9 @@ class FeedTableViewController: UITableViewController {
         }
 
         // Configure the cell...
+        cell.setFavr(tweetARR[indexPath.row]["favorited"] as! Bool)
+        cell.tweetID = tweetARR[indexPath.row]["id"] as! Int
+        cell.setRetweeted(tweetARR[indexPath.row]["retweeted"] as! Bool)
 
         return cell
     }
